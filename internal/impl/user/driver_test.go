@@ -11,7 +11,35 @@ import (
 	"github.com/boris-army/server/internal/core/ports"
 )
 
-func TestDriver_InvalidCommandCreate(t *testing.T) {
+func TestDriver_Create_Ok(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repoUser := NewMockRepositoryUser(ctrl)
+	passHasher := NewMockPasswordHasher(ctrl)
+	d := Driver{Users: repoUser, PasswordHasher: passHasher}
+
+	cmd := ports.CommandUserCreate{
+		Email:      "pgarin@old.me",
+		Surname:    "Garin",
+		GivenNames: "Pyotr",
+		Password:   "qwerty123",
+	}
+	assert.True(t, cmd.IsValid())
+
+	passHasher.EXPECT().Hash(cmd.Password).Return([]byte("foo"), nil)
+
+	repoUser.EXPECT().Create(&domain.User{
+		Email:          "pgarin@old.me",
+		Surname:        "Garin",
+		GivenNames:     "Pyotr",
+		PasswordDigest: []byte("foo"),
+	}).Return(nil)
+
+	assert.Equal(t, nil, d.Create(&cmd))
+}
+
+func TestDriver_Create_InvalidCommand(t *testing.T) {
 	d := Driver{Users: nil, PasswordHasher: nil}
 
 	cmd := ports.CommandUserCreate{}
@@ -21,7 +49,7 @@ func TestDriver_InvalidCommandCreate(t *testing.T) {
 	assert.Equal(t, domain.ErrValue, err)
 }
 
-func TestDriver_RepoUserErrExists(t *testing.T) {
+func TestDriver_Create_RepoUserErrExists(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
@@ -49,7 +77,7 @@ func TestDriver_RepoUserErrExists(t *testing.T) {
 	assert.Equal(t, domain.ErrExists, d.Create(&cmd))
 }
 
-func TestDriver_RepoUserErrOtherProxy(t *testing.T) {
+func TestDriver_Create_RepoUserErrOtherProxy(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
@@ -67,13 +95,12 @@ func TestDriver_RepoUserErrOtherProxy(t *testing.T) {
 
 	passHasher.EXPECT().Hash(cmd.Password).Return([]byte("foo"), nil)
 
-	weirdIoErr := os.ErrNoDeadline
 	repoUser.EXPECT().Create(&domain.User{
 		Email:          "pgarin@old.me",
 		Surname:        "Garin",
 		GivenNames:     "Pyotr",
 		PasswordDigest: []byte("foo"),
-	}).Return(weirdIoErr)
+	}).Return(os.ErrNoDeadline)
 
-	assert.Equal(t, weirdIoErr, d.Create(&cmd))
+	assert.Equal(t, os.ErrNoDeadline, d.Create(&cmd))
 }

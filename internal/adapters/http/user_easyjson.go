@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson9e1087fdDecodeHexInternalAdaptersHttp(in *jlexer.Lexer, out *UserPostCtx) {
+func easyjson9e1087fdDecodeGithubComBorisArmyServerInternalAdaptersHttp(in *jlexer.Lexer, out *UserPostCtx) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -54,7 +54,7 @@ func easyjson9e1087fdDecodeHexInternalAdaptersHttp(in *jlexer.Lexer, out *UserPo
 		in.Consumed()
 	}
 }
-func easyjson9e1087fdEncodeHexInternalAdaptersHttp(out *jwriter.Writer, in UserPostCtx) {
+func easyjson9e1087fdEncodeGithubComBorisArmyServerInternalAdaptersHttp(out *jwriter.Writer, in UserPostCtx) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -84,23 +84,23 @@ func easyjson9e1087fdEncodeHexInternalAdaptersHttp(out *jwriter.Writer, in UserP
 // MarshalJSON supports json.Marshaler interface
 func (v UserPostCtx) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson9e1087fdEncodeHexInternalAdaptersHttp(&w, v)
+	easyjson9e1087fdEncodeGithubComBorisArmyServerInternalAdaptersHttp(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v UserPostCtx) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson9e1087fdEncodeHexInternalAdaptersHttp(w, v)
+	easyjson9e1087fdEncodeGithubComBorisArmyServerInternalAdaptersHttp(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *UserPostCtx) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson9e1087fdDecodeHexInternalAdaptersHttp(&r, v)
+	easyjson9e1087fdDecodeGithubComBorisArmyServerInternalAdaptersHttp(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *UserPostCtx) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson9e1087fdDecodeHexInternalAdaptersHttp(l, v)
+	easyjson9e1087fdDecodeGithubComBorisArmyServerInternalAdaptersHttp(l, v)
 }

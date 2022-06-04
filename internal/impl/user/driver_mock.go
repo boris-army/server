@@ -5,9 +5,9 @@
 package user
 
 import (
-	ports "github.com/boris-army/server/internal/core/ports"
 	reflect "reflect"
 
+	ports "github.com/boris-army/server/internal/core/ports"
 	gomock "github.com/golang/mock/gomock"
 )
 

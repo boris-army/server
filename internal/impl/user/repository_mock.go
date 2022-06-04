@@ -5,9 +5,9 @@
 package user
 
 import (
-	domain "github.com/boris-army/server/internal/core/domain"
 	reflect "reflect"
 
+	domain "github.com/boris-army/server/internal/core/domain"
 	gomock "github.com/golang/mock/gomock"
 )
 
