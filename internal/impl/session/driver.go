@@ -40,10 +40,6 @@ func (d *Driver) CreateHttp(cmd *ports.CommandSessionHttpCreate) error {
 
 func (d *Driver) DecodeHttpTokenTo(dst *domain.SessionHttpToken, src []byte) error {
 	tokData := d.Actkn.Decode(src, &dst.Ctx)
-	if len(tokData) == 0 {
-		return domain.ErrValue
-	}
-
 	if err := easyjson.Unmarshal(tokData, dst); err != nil {
 		return domain.ErrValue
 	}
