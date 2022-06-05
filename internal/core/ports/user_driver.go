@@ -49,6 +49,10 @@ func (c *CommandUserCreate) Reset() {
 }
 
 type DriverUser interface {
+	// Create creates a new user from the given data.
+	// Errors:
+	//	domain.ErrExists - user exists;
+	//	other - internal.
 	Create(*CommandUserCreate) error
 }
 

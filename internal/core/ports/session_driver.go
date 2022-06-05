@@ -45,6 +45,9 @@ func (c *CommandSessionHttpCreate) Reset() {
 }
 
 type SessionDriver interface {
+	// CreateHttp create a new http session for the given user.
+	// IpAddr and UserAgent must be derived from the http request.
+	// Any error occured must be considered internal.
 	CreateHttp(create *CommandSessionHttpCreate) error
 	// DecodeHttpTokenTo decodes and validates the http session token.
 	// Errors:
