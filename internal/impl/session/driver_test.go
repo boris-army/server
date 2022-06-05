@@ -96,7 +96,7 @@ func TestDriver_DecodeHttpTokenTo_Ok(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mgr := actkn.NewMockManagerInterface(ctrl)
+	mgr := actkn.NewMockManager(ctrl)
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))
@@ -118,7 +118,7 @@ func TestDriver_DecodeHttpTokenTo_Invalid(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mgr := actkn.NewMockManagerInterface(ctrl)
+	mgr := actkn.NewMockManager(ctrl)
 	mgr.EXPECT().Decode(nil, &actkn.Ctx{}).Return(nil)
 
 	d := &Driver{
@@ -144,7 +144,7 @@ func TestDriver_DecodeHttpTokenTo_Expired(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mgr := actkn.NewMockManagerInterface(ctrl)
+	mgr := actkn.NewMockManager(ctrl)
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))
@@ -174,7 +174,7 @@ func TestDriver_DecodeHttpTokenTo_Revoked(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mgr := actkn.NewMockManagerInterface(ctrl)
+	mgr := actkn.NewMockManager(ctrl)
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))
@@ -204,7 +204,7 @@ func TestDriver_DecodeHttpTokenTo_RevokeCheckFail(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mgr := actkn.NewMockManagerInterface(ctrl)
+	mgr := actkn.NewMockManager(ctrl)
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))

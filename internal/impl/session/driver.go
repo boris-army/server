@@ -12,7 +12,7 @@ import (
 
 type Driver struct {
 	Sessions ports.RepositorySession
-	Actkn    actkn.ManagerInterface
+	Actkn    actkn.Manager
 }
 
 func (d *Driver) CreateHttp(cmd *ports.CommandSessionHttpCreate) error {

@@ -6,7 +6,7 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/jackc/pgconn v1.12.1
 	github.com/jackc/pgx/v4 v4.16.1
-	github.com/kzmnbrs/actkn v0.0.0-20220604212857-1c850919bef1
+	github.com/kzmnbrs/actkn v0.0.0-20220605001719-74024a7e5bca
 	github.com/kzmnbrs/sly v0.0.0-20220601123124-eb80f0982ff7
 	github.com/mailru/easyjson v0.7.7
 	github.com/stretchr/testify v1.7.1
