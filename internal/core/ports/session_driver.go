@@ -13,9 +13,10 @@ type CommandSessionHttpCreate struct {
 	UserEmail string
 	IpAddr    net.IP
 	UserAgent string
-	Result    domain.SessionHttpToken
-
-	Session_ domain.Session
+	Result    struct {
+		Session domain.Session
+		Token   domain.SessionHttpToken
+	}
 }
 
 func (c *CommandSessionHttpCreate) IsValid() bool {
@@ -39,9 +40,8 @@ func (c *CommandSessionHttpCreate) Reset() {
 	c.UserEmail = ""
 	c.IpAddr = nil
 	c.UserAgent = ""
-	c.Result.Reset()
-
-	c.Session_.Reset()
+	c.Result.Session.Reset()
+	c.Result.Token.Reset()
 }
 
 type SessionDriver interface {

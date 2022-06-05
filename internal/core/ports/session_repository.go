@@ -9,6 +9,7 @@ type RepositorySession interface {
 	// Any error occurred must be interpreted as internal.
 	Create(*domain.Session) error
 	// IsTerminated returns whether the session had been terminated or not.
+	// The given buffer will be used to convert sessionId to bytes.
 	// Any error occurred must be interpreted as internal.
-	IsTerminated(sessionId int64) (bool, error)
+	IsTerminated(sessionId int64, buf []byte) (bool, error)
 }

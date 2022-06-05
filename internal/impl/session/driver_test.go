@@ -100,7 +100,7 @@ func TestDriver_DecodeHttpTokenTo_Ok(t *testing.T) {
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))
-	sess.EXPECT().IsTerminated(int64(1)).Return(false, nil)
+	sess.EXPECT().IsTerminated(int64(1), nil).Return(false, nil)
 
 	d := &Driver{
 		Sessions: sess,
@@ -148,7 +148,7 @@ func TestDriver_DecodeHttpTokenTo_Expired(t *testing.T) {
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))
-	sess.EXPECT().IsTerminated(int64(1)).Return(false, nil)
+	sess.EXPECT().IsTerminated(int64(1), nil).Return(false, nil)
 
 	d := &Driver{
 		Sessions: sess,
@@ -178,7 +178,7 @@ func TestDriver_DecodeHttpTokenTo_Revoked(t *testing.T) {
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))
-	sess.EXPECT().IsTerminated(int64(1)).Return(true, nil)
+	sess.EXPECT().IsTerminated(int64(1), nil).Return(true, nil)
 
 	d := &Driver{
 		Sessions: sess,
@@ -208,7 +208,7 @@ func TestDriver_DecodeHttpTokenTo_RevokeCheckFail(t *testing.T) {
 	mgr.EXPECT().Decode(tokBs, &actkn.Ctx{}).Return(tokBs)
 
 	sess := NewMockRepositorySession(gomock.NewController(t))
-	sess.EXPECT().IsTerminated(int64(1)).Return(false, io.ErrShortWrite)
+	sess.EXPECT().IsTerminated(int64(1), nil).Return(false, io.ErrShortWrite)
 
 	d := &Driver{
 		Sessions: sess,

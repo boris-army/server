@@ -49,16 +49,16 @@ func (mr *MockRepositorySessionMockRecorder) Create(arg0 interface{}) *gomock.Ca
 }
 
 // IsTerminated mocks base method.
-func (m *MockRepositorySession) IsTerminated(sessionId int64) (bool, error) {
+func (m *MockRepositorySession) IsTerminated(sessionId int64, buf []byte) (bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "IsTerminated", sessionId)
+	ret := m.ctrl.Call(m, "IsTerminated", sessionId, buf)
 	ret0, _ := ret[0].(bool)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // IsTerminated indicates an expected call of IsTerminated.
-func (mr *MockRepositorySessionMockRecorder) IsTerminated(sessionId interface{}) *gomock.Call {
+func (mr *MockRepositorySessionMockRecorder) IsTerminated(sessionId, buf interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsTerminated", reflect.TypeOf((*MockRepositorySession)(nil).IsTerminated), sessionId)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsTerminated", reflect.TypeOf((*MockRepositorySession)(nil).IsTerminated), sessionId, buf)
 }

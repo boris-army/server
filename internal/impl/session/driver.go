@@ -20,7 +20,7 @@ func (d *Driver) CreateHttp(cmd *ports.CommandSessionHttpCreate) error {
 		return domain.ErrValue
 	}
 
-	sess := &cmd.Session_
+	sess := &cmd.Result.Session
 	sess.Type = domain.SessionTypeHttp
 	sess.UserId = cmd.UsedId
 	sess.Http.IpAddr = cmd.IpAddr.String()
@@ -30,7 +30,7 @@ func (d *Driver) CreateHttp(cmd *ports.CommandSessionHttpCreate) error {
 		return err
 	}
 
-	tok := &cmd.Result
+	tok := &cmd.Result.Token
 	tok.SessionId = sess.Id
 	tok.User.Id = sess.UserId
 	tok.User.Email = cmd.UserEmail
@@ -44,7 +44,7 @@ func (d *Driver) DecodeHttpTokenTo(dst *domain.SessionHttpToken, src []byte) err
 		return domain.ErrValue
 	}
 
-	isRevoked, err := d.Sessions.IsTerminated(dst.SessionId)
+	isRevoked, err := d.Sessions.IsTerminated(dst.SessionId, dst.Ctx.Buf[:0])
 	switch {
 	case isRevoked:
 		return domain.ErrSessionTerminated
