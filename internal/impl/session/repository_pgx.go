@@ -2,6 +2,7 @@ package session
 
 import (
 	"context"
+	"database/sql"
 	"log"
 	"strconv"
 	"time"
@@ -43,6 +44,25 @@ func (r *PgxRepository) IsTerminated(sid int64, buf []byte) (bool, error) {
 		return false, nil
 	}
 
+	conn, err := r.Pool.Acquire(context.Background())
+	if err != nil {
+		return false, err
+	}
+	defer conn.Release()
+
+	const selectSession = `
+		select terminatedAt from sessions
+		where id = ?
+	`
+	var terminatedAt sql.NullTime
+	if err := conn.QueryRow(context.Background(), selectSession, sid).Scan(&terminatedAt); err != nil {
+		return false, err
+	}
+
+	if terminatedAt.Valid && terminatedAt.Time.Before(time.Now()) {
+		return true, nil
+	}
+
 	return false, nil
 }
 
@@ -64,7 +84,7 @@ func (r *PgxRepository) reindexTerminatedSids() error {
 		}
 		switch {
 		case count > 0:
-			r.terminatedSids = boom.NewUnstableBloomFilter(uint(float64(count)*1.5), .0001)
+			r.terminatedSids = boom.NewUnstableBloomFilter(uint(float64(count)*1.2), .0001)
 		default:
 			return nil
 		}

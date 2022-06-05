@@ -14,7 +14,7 @@ type Access struct {
 
 type HandlerWithAccess = func(*fasthttp.RequestCtx, *domain.SessionHttpToken)
 
-type AccessEnforcerFn = func(token *domain.SessionHttpToken) bool
+type AccessEnforcerFn = func(*domain.SessionHttpToken) bool
 
 func (m *Access) Apply(next HandlerWithAccess, enforcerFn AccessEnforcerFn) fasthttp.RequestHandler {
 	return func(req *fasthttp.RequestCtx) {
