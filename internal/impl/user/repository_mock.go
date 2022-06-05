@@ -47,17 +47,3 @@ func (mr *MockRepositoryUserMockRecorder) Create(arg0 interface{}) *gomock.Call 
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockRepositoryUser)(nil).Create), arg0)
 }
-
-// LoadById mocks base method.
-func (m *MockRepositoryUser) LoadById(dst *domain.User) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "LoadById", dst)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// LoadById indicates an expected call of LoadById.
-func (mr *MockRepositoryUserMockRecorder) LoadById(dst interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LoadById", reflect.TypeOf((*MockRepositoryUser)(nil).LoadById), dst)
-}
