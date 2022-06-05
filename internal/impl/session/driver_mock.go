@@ -12,31 +12,31 @@ import (
 	gomock "github.com/golang/mock/gomock"
 )
 
-// MockSessionDriver is a mock of SessionDriver interface.
-type MockSessionDriver struct {
+// MockDriverSession is a mock of DriverSession interface.
+type MockDriverSession struct {
 	ctrl     *gomock.Controller
-	recorder *MockSessionDriverMockRecorder
+	recorder *MockDriverSessionMockRecorder
 }
 
-// MockSessionDriverMockRecorder is the mock recorder for MockSessionDriver.
-type MockSessionDriverMockRecorder struct {
-	mock *MockSessionDriver
+// MockDriverSessionMockRecorder is the mock recorder for MockDriverSession.
+type MockDriverSessionMockRecorder struct {
+	mock *MockDriverSession
 }
 
-// NewMockSessionDriver creates a new mock instance.
-func NewMockSessionDriver(ctrl *gomock.Controller) *MockSessionDriver {
-	mock := &MockSessionDriver{ctrl: ctrl}
-	mock.recorder = &MockSessionDriverMockRecorder{mock}
+// NewMockDriverSession creates a new mock instance.
+func NewMockDriverSession(ctrl *gomock.Controller) *MockDriverSession {
+	mock := &MockDriverSession{ctrl: ctrl}
+	mock.recorder = &MockDriverSessionMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockSessionDriver) EXPECT() *MockSessionDriverMockRecorder {
+func (m *MockDriverSession) EXPECT() *MockDriverSessionMockRecorder {
 	return m.recorder
 }
 
 // CreateHttp mocks base method.
-func (m *MockSessionDriver) CreateHttp(create *ports.CommandSessionHttpCreate) error {
+func (m *MockDriverSession) CreateHttp(create *ports.CommandSessionHttpCreate) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateHttp", create)
 	ret0, _ := ret[0].(error)
@@ -44,13 +44,13 @@ func (m *MockSessionDriver) CreateHttp(create *ports.CommandSessionHttpCreate) e
 }
 
 // CreateHttp indicates an expected call of CreateHttp.
-func (mr *MockSessionDriverMockRecorder) CreateHttp(create interface{}) *gomock.Call {
+func (mr *MockDriverSessionMockRecorder) CreateHttp(create interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateHttp", reflect.TypeOf((*MockSessionDriver)(nil).CreateHttp), create)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateHttp", reflect.TypeOf((*MockDriverSession)(nil).CreateHttp), create)
 }
 
 // DecodeHttpTokenTo mocks base method.
-func (m *MockSessionDriver) DecodeHttpTokenTo(dst *domain.SessionHttpToken, src []byte) error {
+func (m *MockDriverSession) DecodeHttpTokenTo(dst *domain.SessionHttpToken, src []byte) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DecodeHttpTokenTo", dst, src)
 	ret0, _ := ret[0].(error)
@@ -58,7 +58,7 @@ func (m *MockSessionDriver) DecodeHttpTokenTo(dst *domain.SessionHttpToken, src 
 }
 
 // DecodeHttpTokenTo indicates an expected call of DecodeHttpTokenTo.
-func (mr *MockSessionDriverMockRecorder) DecodeHttpTokenTo(dst, src interface{}) *gomock.Call {
+func (mr *MockDriverSessionMockRecorder) DecodeHttpTokenTo(dst, src interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DecodeHttpTokenTo", reflect.TypeOf((*MockSessionDriver)(nil).DecodeHttpTokenTo), dst, src)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DecodeHttpTokenTo", reflect.TypeOf((*MockDriverSession)(nil).DecodeHttpTokenTo), dst, src)
 }

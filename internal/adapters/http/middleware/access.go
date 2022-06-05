@@ -9,7 +9,7 @@ import (
 )
 
 type Access struct {
-	Sessions ports.SessionDriver
+	Sessions ports.DriverSession
 }
 
 type HandlerWithAccess = func(*fasthttp.RequestCtx, *domain.SessionHttpToken)

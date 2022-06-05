@@ -81,7 +81,7 @@ func TestAccess_Apply(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			sess := session.NewMockSessionDriver(ctrl)
+			sess := session.NewMockDriverSession(ctrl)
 			if tc.hasSomeTok {
 				sess.EXPECT().
 					DecodeHttpTokenTo(&domain.SessionHttpToken{}, []byte("tok")).

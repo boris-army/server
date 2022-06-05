@@ -44,7 +44,7 @@ func (c *CommandSessionHttpCreate) Reset() {
 	c.Result.Token.Reset()
 }
 
-type SessionDriver interface {
+type DriverSession interface {
 	// CreateHttp create a new http session for the given user.
 	// IpAddr and UserAgent must be derived from the http request.
 	// Any error occured must be considered internal.
