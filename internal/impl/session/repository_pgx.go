@@ -51,7 +51,7 @@ func (r *PgxRepository) IsTerminated(sid int64, buf []byte) (bool, error) {
 	defer conn.Release()
 
 	const selectSession = `
-		select terminatedAt from sessions
+		select terminated_at from sessions
 		where id = ?
 	`
 	var terminatedAt sql.NullTime
@@ -76,7 +76,7 @@ func (r *PgxRepository) reindexTerminatedSids() error {
 	if r.terminatedSids == nil {
 		const selectTerminatedSidsCount = `
 			select count(*) from sessions
-			where terminatedAt is not null
+			where terminated_at is not null
 		`
 		var count uint
 		if err := conn.QueryRow(context.Background(), selectTerminatedSidsCount).Scan(&count); err != nil {
@@ -92,7 +92,7 @@ func (r *PgxRepository) reindexTerminatedSids() error {
 
 	const selectTerminatedSids = `
 		select id from sessions
-		where terminatedAt is not null
+		where terminated_at is not null
 	`
 	rows, err := conn.Query(context.Background(), selectTerminatedSids)
 	if err != nil {
