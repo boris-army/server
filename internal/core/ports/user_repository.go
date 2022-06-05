@@ -12,9 +12,4 @@ type RepositoryUser interface {
 	//	domain.ErrExists - the user already exists;
 	//	other - internal error.
 	Create(*domain.User) error
-	// LoadById loads the dst by its id.
-	// Errors:
-	//	domain.ErrKey - the user does not exist;
-	//	other - internal error.
-	LoadById(dst *domain.User) error
 }

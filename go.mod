@@ -10,14 +10,12 @@ require (
 	github.com/kzmnbrs/sly v0.0.0-20220601123124-eb80f0982ff7
 	github.com/mailru/easyjson v0.7.7
 	github.com/stretchr/testify v1.7.1
-	github.com/tylertreat/BoomFilters v0.0.0-20210315201527-1a82519a3e43
 	github.com/valyala/fasthttp v1.37.0
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
 )
 
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
-	github.com/d4l3k/messagediff v1.2.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
