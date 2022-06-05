@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"io"
 	"testing"
 
 	"github.com/golang/mock/gomock"
@@ -65,6 +66,13 @@ func TestAccess_Apply(t *testing.T) {
 			expDriverErr: nil,
 			expResCode:   fasthttp.StatusForbidden,
 			expResBody:   []byte(`{"err":{"code":"` + render.CodeTokenInsufficient + `"}}`),
+		},
+		{
+			name:         "internal",
+			hasSomeTok:   true,
+			expDriverErr: io.ErrShortWrite,
+			expResCode:   fasthttp.StatusInternalServerError,
+			expResBody:   []byte(`{"err":{"code":"` + render.CodeInternal + `"}}`),
 		},
 	}
 
